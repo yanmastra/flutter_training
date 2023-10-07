@@ -73,7 +73,20 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           Expanded(
-            child: menuIndex == 0 ? LoginPage() : ListViewExample(),
+            child: Builder(
+              builder: (context) {
+                //menuIndex == 0 ? LoginPage() : menuIndex == 1 ? Center() : ListViewExample(),
+                if (menuIndex == 0) {
+                  return LoginPage();
+                } else if (menuIndex == 1) {
+                  return Center(
+                    child: Text("Hallo $menuIndex"),
+                  );
+                } else {
+                  return ListViewExample();
+                }
+              },
+            ),
           ),
           SizedBox(
             height: 57,
@@ -103,10 +116,26 @@ class _MyHomePageState extends State<MyHomePage> {
                       });
                     },
                     child: Text(
-                      "ListViewExample",
+                      "Random",
                       style: TextStyle(
                         fontWeight: menuIndex == 1 ? FontWeight.bold : FontWeight.normal,
                         fontSize: menuIndex == 1 ? 16 : 14,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        menuIndex = 3;
+                      });
+                    },
+                    child: Text(
+                      "List View Example",
+                      style: TextStyle(
+                        fontWeight: menuIndex == 3 ? FontWeight.bold : FontWeight.normal,
+                        fontSize: menuIndex == 3 ? 16 : 14,
                       ),
                     ),
                   ),
